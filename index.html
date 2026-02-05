@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWAA Performance Improvement Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Performance Optimization Report</h1>
+            <p>Impact of Parallelism and COPY_INTO on MWAA DAG Run Times</p>
+        </header>
+
+        <!-- DAG 1 -->
+        <div class="dag-section">
+            <div class="dag-title">
+                <span>DAG: fintrx_to_sf_contact_dag_combined</span>
+            </div>
+            <div class="grid">
+                <!-- Base -->
+                <div class="card">
+                    <span class="stage-label">OLD LOGIC (BASE)</span>
+                    <span class="duration">3h 53m</span>
+                    <span class="date">Run Date: Dec 20, 2025</span>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Avg Task Time</span>
+                        <span class="metric-value">High</span>
+                    </div>
+                </div>
+
+                <!-- Parallelism -->
+                <div class="card">
+                    <div class="badge" style="background:var(--accent-color)">63% FASTER</div>
+                    <span class="stage-label">PARALLELISM</span>
+                    <span class="duration">1h 27m</span>
+                    <span class="date">Run Date: Jan 23, 2026</span>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Time Saved</span>
+                        <span class="metric-value">~2.5 Hours</span>
+                    </div>
+                </div>
+
+                <!-- COPY_INTO -->
+                <div class="card highlight">
+                    <div class="badge">65% FASTER</div>
+                    <span class="stage-label">COPY_INTO + PARALLELISM</span>
+                    <span class="duration">1h 21m</span>
+                    <span class="date">Run Date: Jan 29, 2026</span>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Write CSV Time</span>
+                        <span class="metric-value">18s (vs ~33m)</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Time Saved</span>
+                        <span class="metric-value">~2.5 Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAG 2 -->
+        <div class="dag-section">
+            <div class="dag-title">
+                <span>DAG: sc_to_sf_contact_dag_combined</span>
+            </div>
+            <div class="grid">
+                <!-- Base -->
+                <div class="card">
+                    <span class="stage-label">OLD LOGIC (BASE)</span>
+                    <span class="duration">1h 39m</span>
+                    <span class="date">Run Date: Jan 09, 2026</span>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Write CSV Time</span>
+                        <span class="metric-value">11m 50s</span>
+                    </div>
+                </div>
+
+                <!-- Parallelism -->
+                <div class="card">
+                    <div class="badge" style="background:var(--accent-color)">41% FASTER</div>
+                    <span class="stage-label">PARALLELISM</span>
+                    <span class="duration">58m</span>
+                    <span class="date">Run Date: Jan 20, 2026</span>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Write CSV Time</span>
+                        <span class="metric-value">~10m</span>
+                    </div>
+                </div>
+
+                <!-- COPY_INTO -->
+                <div class="card highlight">
+                    <div class="badge">45% FASTER</div>
+                    <span class="stage-label">COPY_INTO + PARALLELISM</span>
+                    <span class="duration">54m</span>
+                    <span class="date">Run Date: Jan 31, 2026</span>
+
+                    <div class="metric-row">
+                        <span class="metric-label">Write CSV Time</span>
+                        <span class="metric-value" style="color: #4ade80">11s</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Total Time Saved</span>
+                        <span class="metric-value">~45 Mins</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
