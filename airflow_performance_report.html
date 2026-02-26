@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,7 +125,8 @@
             margin: 1.5rem 0;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 1rem;
             border-bottom: 1px solid var(--border);
@@ -182,152 +184,133 @@
                 background: white;
                 padding: 0;
             }
+
             .container {
                 box-shadow: none;
                 max-width: 100%;
             }
+
             .chart-container {
                 break-inside: avoid;
             }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>Airflow DAG Performance Improvement</h1>
-        <p>Executive Report &mdash; February 26, 2026</p>
-    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Airflow DAG Performance Improvement</h1>
+            <p>Executive Report &mdash; February 26, 2026</p>
+        </div>
 
-    <div class="content">
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <h3>1,442</h3>
-                <p>Hours Saved Annually</p>
+        <div class="content">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <h3>1,442</h3>
+                    <p>Hours Saved Annually</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>48.9%</h3>
+                    <p>Faster Full Loads</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>61.5%</h3>
+                    <p>Faster Delta Loads</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>60</h3>
+                    <p>Days of Compute Saved</p>
+                </div>
             </div>
-            <div class="kpi-card">
-                <h3>48.9%</h3>
-                <p>Faster Full Loads</p>
+
+
+            <h2 class="section-title">Key Results Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Run Type</th>
+                        <th>Before Optimization</th>
+                        <th>After Optimization</th>
+                        <th>Improvement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Full Load Runs</strong></td>
+                        <td>5h 24m (avg)</td>
+                        <td>2h 45m (avg)</td>
+                        <td><span class="highlight-green">48.9% (2h 38m saved)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Delta Load Runs</strong></td>
+                        <td>2h 35m (avg)</td>
+                        <td>59m (avg)</td>
+                        <td><span class="highlight-green">61.5% (1h 35m saved)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title">How We Achieved This</h2>
+            <div class="impact-grid" style="margin-bottom: 2rem;">
+                <div class="impact-card">
+                    <h4>Parallel Processing</h4>
+                    <p>We restructured the workloads to run multiple steps concurrently rather than sequentially,
+                        significantly reducing the overall time it takes pipelines to finish.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Optimized Data Loading</h4>
+                    <p>We engineered a highly efficient data ingestion strategy that leverages native cloud data
+                        warehouse capabilities to ingest massive datasets at unparalleled speeds.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Enhanced Monitoring</h4>
+                    <p>We implemented robust tracking and automated immediate notifications. This ensures the team is
+                        instantly alerted to any issues, drastically reducing downtime and troubleshooting delays.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Implementation Timeline</h4>
+                    <p>From kickoff on <strong>Jan 3</strong>, core parallel engineering was achieved by <strong>Jan
+                            21</strong>. Following final data integration optimization on <strong>Jan 28</strong>, the
+                        complete solution went live in production on <strong>Feb 7</strong> (Total effort: <strong>1
+                            Month / 2 Sprints</strong>).</p>
+                </div>
             </div>
-            <div class="kpi-card">
-                <h3>61.5%</h3>
-                <p>Faster Delta Loads</p>
-            </div>
-            <div class="kpi-card">
-                <h3>60</h3>
-                <p>Days of Compute Saved</p>
+
+            <h2 class="section-title">Business Impact Analysis</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h4>Cost Efficiency</h4>
+                    <p>Eliminating 1,442 hours of compute time annually drastically reduces AWS infrastructure costs and
+                        allows better resource allocation.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Faster Data Availability</h4>
+                    <p>Data is now available 2-3 hours earlier, accelerating time-to-insight for stakeholders and
+                        business decision-making.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Operational Reliability</h4>
+                    <p>Increased consistency with significantly reduced variance, ensuring highly predictable and stable
+                        average execution times across all pipeline runs.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Scalability</h4>
+                    <p>The system is highly optimized and well-positioned to handle future data growth and more frequent
+                        execution schedules.</p>
+                </div>
             </div>
         </div>
 
-        <h2 class="section-title">Execution Time Comparison</h2>
-        <div class="chart-container">
-            <canvas id="performanceChart"></canvas>
-        </div>
-
-        <h2 class="section-title">Key Results Summary</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Run Type</th>
-                    <th>Before Optimization</th>
-                    <th>After Optimization</th>
-                    <th>Improvement</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Full Load Runs</strong></td>
-                    <td>5h 24m (avg)</td>
-                    <td>2h 45m (avg)</td>
-                    <td><span class="highlight-green">48.9% (2h 38m saved)</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Delta Load Runs</strong></td>
-                    <td>2h 35m (avg)</td>
-                    <td>59m (avg)</td>
-                    <td><span class="highlight-green">61.5% (1h 35m saved)</span></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2 class="section-title">Business Impact Analysis</h2>
-        <div class="impact-grid">
-            <div class="impact-card">
-                <h4>Cost Efficiency</h4>
-                <p>Eliminating 1,442 hours of compute time annually drastically reduces AWS infrastructure costs and allows better resource allocation.</p>
-            </div>
-            <div class="impact-card">
-                <h4>Faster Data Availability</h4>
-                <p>Data is now available 2-3 hours earlier, accelerating time-to-insight for stakeholders and business decision-making.</p>
-            </div>
-            <div class="impact-card">
-                <h4>Operational Reliability</h4>
-                <p>Increased consistency with significantly reduced variance (e.g., worst-case full loads dropped from 9h 24m to 4h 34m).</p>
-            </div>
-            <div class="impact-card">
-                <h4>Scalability</h4>
-                <p>The system is highly optimized and well-positioned to handle future data growth and more frequent execution schedules.</p>
-            </div>
+        <div class="footer">
+            <p>Prepared by the Data Engineering Team &mdash; Analysis Period: Jan 15 - Feb 26, 2026 (Based on 36
+                production runs)</p>
         </div>
     </div>
 
-    <div class="footer">
-        <p>Prepared by the Data Engineering Team &mdash; Analysis Period: Jan 15 - Feb 26, 2026 (Based on 36 production runs)</p>
-    </div>
-</div>
 
-<script>
-    const ctx = document.getElementById('performanceChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Full Load Runs', 'Delta Load Runs'],
-            datasets: [
-                {
-                    label: 'Before Optimization (Minutes)',
-                    data: [324, 155], // 5h24m = 324m, 2h35m = 155m
-                    backgroundColor: '#94a3b8',
-                    borderRadius: 6
-                },
-                {
-                    label: 'After Optimization (Minutes)',
-                    data: [165, 59], // 2h45m = 165m, 59m = 59m
-                    backgroundColor: '#10b981',
-                    borderRadius: 6
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let minutes = context.raw;
-                            let h = Math.floor(minutes / 60);
-                            let m = minutes % 60;
-                            return `${context.dataset.label}: ${h}h ${m}m (${minutes} min)`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Average Execution Time (Minutes)'
-                    }
-                }
-            }
-        }
-    });
-</script>
 
 </body>
+
 </html>
