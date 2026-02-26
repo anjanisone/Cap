@@ -227,6 +227,10 @@
 
 
             <h2 class="section-title">Key Results Summary</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                <em>Note: All averages are calculated from actual production data (36 total data points: 18 runs before
+                    optimization, 18 runs after).</em>
+            </p>
             <table>
                 <thead>
                     <tr>
@@ -256,34 +260,34 @@
             <div class="impact-grid" style="margin-bottom: 2rem;">
                 <div class="impact-card">
                     <h4>Parallel Processing</h4>
-                    <p>We restructured the workloads to run multiple steps concurrently rather than sequentially,
-                        significantly reducing the overall time it takes pipelines to finish.</p>
+                    <p>Restructured workloads to run concurrently rather than sequentially, significantly reducing
+                        pipeline finish times.</p>
                 </div>
                 <div class="impact-card">
                     <h4>Optimized Data Loading</h4>
-                    <p>We engineered a highly efficient data ingestion strategy that leverages native cloud data
-                        warehouse capabilities to ingest massive datasets at unparalleled speeds.</p>
+                    <p>Engineered an efficient data ingestion strategy leveraging native cloud capabilities to load
+                        massive datasets at unparalleled speeds.</p>
                 </div>
                 <div class="impact-card">
                     <h4>Enhanced Monitoring</h4>
-                    <p>We implemented robust tracking and automated immediate notifications. This ensures the team is
-                        instantly alerted to any issues, drastically reducing downtime and troubleshooting delays.</p>
+                    <p>Implemented robust tracking and immediate automated alerts, drastically reducing downtime and
+                        troubleshooting delays.</p>
                 </div>
                 <div class="impact-card">
                     <h4>Implementation Timeline</h4>
-                    <p>From kickoff on <strong>Jan 3</strong>, core parallel engineering was achieved by <strong>Jan
-                            21</strong>. Following final data integration optimization on <strong>Jan 28</strong>, the
-                        complete solution went live in production on <strong>Feb 7</strong> (Total effort: <strong>1
-                            Month / 2 Sprints</strong>).</p>
+                    <p><strong>Jan 3</strong> kickoff, core engineering by <strong>Jan 28</strong>, and live in
+                        production on <strong>Feb 7</strong> (Total effort: <strong>1 Month / 2 Sprints</strong>).</p>
                 </div>
             </div>
 
             <h2 class="section-title">Business Impact Analysis</h2>
             <div class="impact-grid">
                 <div class="impact-card">
-                    <h4>Cost Efficiency</h4>
-                    <p>Eliminating 1,442 hours of compute time annually drastically reduces AWS infrastructure costs and
-                        allows better resource allocation.</p>
+                    <h4>Future Infrastructure Optimization</h4>
+                    <p>While current Amazon MWAA costs remain static due to environment tier pricing, eliminating
+                        1,442 hours of annual compute overhead substantially lowers utilization. This creates the
+                        necessary headroom to safely downsize the entire MWAA environment tier, which is the direct path
+                        to unlocking cloud infrastructure savings.</p>
                 </div>
                 <div class="impact-card">
                     <h4>Faster Data Availability</h4>
