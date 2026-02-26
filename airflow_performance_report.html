@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airflow DAG Performance Improvement Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --bg-body: #f1f5f9;
+            --bg-surface: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-surface);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            color: var(--primary-light);
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--success-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #a7f3d0;
+        }
+
+        .kpi-card h3 {
+            color: var(--success);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-card p {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 350px;
+            margin: 2rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-green {
+            color: var(--success);
+            font-weight: 600;
+            background: var(--success-light);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .impact-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .impact-card h4 {
+            color: var(--primary);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .chart-container {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Airflow DAG Performance Improvement</h1>
+        <p>Executive Report &mdash; February 26, 2026</p>
+    </div>
+
+    <div class="content">
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <h3>1,442</h3>
+                <p>Hours Saved Annually</p>
+            </div>
+            <div class="kpi-card">
+                <h3>48.9%</h3>
+                <p>Faster Full Loads</p>
+            </div>
+            <div class="kpi-card">
+                <h3>61.5%</h3>
+                <p>Faster Delta Loads</p>
+            </div>
+            <div class="kpi-card">
+                <h3>60</h3>
+                <p>Days of Compute Saved</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Execution Time Comparison</h2>
+        <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+        </div>
+
+        <h2 class="section-title">Key Results Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Run Type</th>
+                    <th>Before Optimization</th>
+                    <th>After Optimization</th>
+                    <th>Improvement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Full Load Runs</strong></td>
+                    <td>5h 24m (avg)</td>
+                    <td>2h 45m (avg)</td>
+                    <td><span class="highlight-green">48.9% (2h 38m saved)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Delta Load Runs</strong></td>
+                    <td>2h 35m (avg)</td>
+                    <td>59m (avg)</td>
+                    <td><span class="highlight-green">61.5% (1h 35m saved)</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">Business Impact Analysis</h2>
+        <div class="impact-grid">
+            <div class="impact-card">
+                <h4>Cost Efficiency</h4>
+                <p>Eliminating 1,442 hours of compute time annually drastically reduces AWS infrastructure costs and allows better resource allocation.</p>
+            </div>
+            <div class="impact-card">
+                <h4>Faster Data Availability</h4>
+                <p>Data is now available 2-3 hours earlier, accelerating time-to-insight for stakeholders and business decision-making.</p>
+            </div>
+            <div class="impact-card">
+                <h4>Operational Reliability</h4>
+                <p>Increased consistency with significantly reduced variance (e.g., worst-case full loads dropped from 9h 24m to 4h 34m).</p>
+            </div>
+            <div class="impact-card">
+                <h4>Scalability</h4>
+                <p>The system is highly optimized and well-positioned to handle future data growth and more frequent execution schedules.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Prepared by the Data Engineering Team &mdash; Analysis Period: Jan 15 - Feb 26, 2026 (Based on 36 production runs)</p>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Full Load Runs', 'Delta Load Runs'],
+            datasets: [
+                {
+                    label: 'Before Optimization (Minutes)',
+                    data: [324, 155], // 5h24m = 324m, 2h35m = 155m
+                    backgroundColor: '#94a3b8',
+                    borderRadius: 6
+                },
+                {
+                    label: 'After Optimization (Minutes)',
+                    data: [165, 59], // 2h45m = 165m, 59m = 59m
+                    backgroundColor: '#10b981',
+                    borderRadius: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let minutes = context.raw;
+                            let h = Math.floor(minutes / 60);
+                            let m = minutes % 60;
+                            return `${context.dataset.label}: ${h}h ${m}m (${minutes} min)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Average Execution Time (Minutes)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
