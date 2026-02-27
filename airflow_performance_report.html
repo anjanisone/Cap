@@ -202,7 +202,7 @@
     <div class="container">
         <div class="header">
             <h1>Airflow DAG Performance Improvement</h1>
-            <p>Executive Report &mdash; February 26, 2026</p>
+            <p>Report &mdash; February 26, 2026</p>
         </div>
 
         <div class="content">
@@ -259,19 +259,40 @@
             <h2 class="section-title">How We Achieved This</h2>
             <div class="impact-grid" style="margin-bottom: 2rem;">
                 <div class="impact-card">
-                    <h4>Parallel Processing</h4>
-                    <p>Restructured workloads to run concurrently rather than sequentially, significantly reducing
-                        pipeline finish times.</p>
+                    <h4>Parallel DAG Execution</h4>
+                    <ul
+                        style="padding-left: 1.25rem; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                        <li style="margin-bottom: 0.25rem;">Configured Airflow to leverage native concurrency controls,
+                            allowing independent DAG branches to execute in parallel.</li>
+                        <li style="margin-bottom: 0.25rem;">Eliminated sequential execution bottlenecks by optimizing
+                            task pool allocations.</li>
+                        <li style="margin-bottom: 0.25rem;">Maximized concurrent resource utilization, drastically
+                            reducing the critical path latency of data pipelines.</li>
+                    </ul>
                 </div>
                 <div class="impact-card">
                     <h4>Optimized Data Loading</h4>
-                    <p>Engineered an efficient data ingestion strategy leveraging native cloud capabilities to load
-                        massive datasets at unparalleled speeds.</p>
+                    <ul
+                        style="padding-left: 1.25rem; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                        <li style="margin-bottom: 0.25rem;">Offloaded I/O ingestion completely from Airflow worker nodes
+                            via Snowflake <code>COPY INTO</code> pushdown compute.</li>
+                        <li style="margin-bottom: 0.25rem;">Enabled distributed, multi-threaded staging directly from
+                            cloud object storage, bypassing application-layer data transfer.</li>
+                        <li style="margin-bottom: 0.25rem;">Eliminated worker Out-Of-Memory (OOM) network bottlenecks
+                            entirely for large dataset ETL pipelines.</li>
+                    </ul>
                 </div>
                 <div class="impact-card">
                     <h4>Enhanced Monitoring</h4>
-                    <p>Implemented robust tracking and immediate automated alerts, drastically reducing downtime and
-                        troubleshooting delays.</p>
+                    <ul
+                        style="padding-left: 1.25rem; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                        <li style="margin-bottom: 0.25rem;">Integrated pipeline execution logs directly with AWS
+                            CloudWatch for centralized observability.</li>
+                        <li style="margin-bottom: 0.25rem;">Implemented robust Airflow Scheduled Runs, guaranteeing
+                            precise execution cadence.</li>
+                        <li style="margin-bottom: 0.25rem;">Configured immediate email threshold alerting on DAG
+                            failures to drastically reduce Mean Time To Resolution (MTTR).</li>
+                    </ul>
                 </div>
                 <div class="impact-card">
                     <h4>Implementation Timeline</h4>
@@ -308,7 +329,7 @@
         </div>
 
         <div class="footer">
-            <p>Prepared by the Data Engineering Team &mdash; Analysis Period: Jan 15 - Feb 26, 2026 (Based on 36
+            <p>Prepared by Prakhar's Data Team &mdash; Analysis Period: Jan 15 - Feb 26, 2026 (Based on 36
                 production runs)</p>
         </div>
     </div>
